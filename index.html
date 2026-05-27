@@ -3,70 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Nombre — Portfolio</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/core.css">
-    <link rel="stylesheet" href="/style.css">
+    <title>Portfolio</title>
+    <!-- Vinculación del archivo CSS completo -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+
+    <main class="container">
         
+        <!-- CABECERA PRINCIPAL (Sin el brand-name duplicado) -->
         <header class="header-main">
-            <span class="brand-name">tu nombre</span>
+            <h1>Tu Nombre</h1>
+            <p class="subtitle">Product Designer</p>
         </header>
 
-        <main>
-            <section class="intro-section">
-                <h1>Tu Nombre</h1>
-                <p class="subtitle">Diseñador de Producto</p>
-                <p class="description">
-                    Hola. Me dedico a conceptualizar y diseñar productos digitales con un enfoque estratégico. Me apasiona resolver problemas complejos a través de interfaces limpias, funcionales y con una atención obsesiva por el detalle.
-                </p>
-            </section>
+        <!-- INTRODUCCIÓN / SOBRE MÍ -->
+        <section class="description">
+            <p>
+                Diseñador de producto enfocado en la resolución de problemas complejos a través de soluciones sencillas, funcionales y de alta calidad visual. Especializado en conceptualización estratégica, arquitectura de información y diseño de interacción.
+            </p>
+        </section>
 
-            <section id="projects">
-                <h2>Proyectos</h2>
-                <div class="list">
-                    <a href="#" class="item" onclick="accederProyecto(event)">
-                        <span class="title">Diseño de una App de Gestión</span>
-                        <span class="dots"></span>
-                        <span class="year">2026</span>
-                    </a>
+        <!-- SECCIÓN DE PROYECTOS / CASOS DE ESTUDIO -->
+        <section>
+            <h2>Proyectos Destacados</h2>
+            <div class="list">
+                
+                <!-- Ítem de Proyecto 1 -->
+                <a href="proyecto-1.html" class="item">
+                    <span class="title">Nombre del Proyecto Uno</span>
+                    <span class="dots"></span>
+                    <span class="year">2026</span>
+                </a>
+
+                <!-- Ítem de Proyecto 2 -->
+                <a href="proyecto-2.html" class="item">
+                    <span class="title">Plataforma Digital B2B</span>
+                    <span class="dots"></span>
+                    <span class="year">2025</span>
+                </a>
+
+                <!-- Ítem de Proyecto 3 -->
+                <a href="proyecto-3.html" class="item">
+                    <span class="title">Rediseño Sistema de Interacción</span>
+                    <span class="dots"></span>
+                    <span class="year">2025</span>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE EXPERIENCIA O LABORES ADICIONALES -->
+        <section>
+            <h2>Trayectoria</h2>
+            <div class="list">
+                
+                <div class="item" style="pointer-events: none;">
+                    <span class="title">Senior Product Designer</span>
+                    <span class="dots"></span>
+                    <span class="year">Presente</span>
                 </div>
-            </section>
 
-            <section id="writing">
-                <h2>Artículos</h2>
-                <div class="list">
-                    <a href="/articulos/articulo-1.html" class="item">
-                        <span class="title">Por qué el minimalismo es una decisión de negocio</span>
-                        <span class="dots"></span>
-                        <span class="year">Mayo</span>
-                    </a>
+                <div class="item" style="pointer-events: none;">
+                    <span class="title">Graphic Designer</span>
+                    <span class="dots"></span>
+                    <span class="year">3 años</span>
                 </div>
-            </section>
-        </main>
-    </div>
 
-    <script>
-    async function accederProyecto(event) {
-        event.preventDefault(); 
-        
-        const password = prompt("Este proyecto es confidencial. Introduce la contraseña:");
-        if (!password) return; 
+            </div>
+        </section>
 
-        const encoder = new TextEncoder();
-        const data = encoder.encode(password);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        
-        const codigoArchivo = hashHex.substring(0, 8);
+    </main>
 
-        // Redirige usando la ruta absoluta de la carpeta proyectos
-        window.location.href = `/proyectos/${codigoArchivo}.html`;
-    }
-    </script>
-
-    <script src="/postit.js" defer></script>
+    <!-- INYECCIÓN DEL COMPONENTE NOTA -->
+    <script src="postit.js"></script>
 </body>
 </html>
