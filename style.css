@@ -175,10 +175,9 @@ a .project-card:hover {
     overflow: hidden;
     resize: both;
     box-sizing: border-box;
-    touch-action: none; /* Evita scrolls accidentales en pantallas táctiles */
+    touch-action: none;
 }
 
-/* Bloqueo de redimensionado en estado colapsado */
 .postit-container.minimized {
     resize: none !important;
     height: 36px !important;
@@ -186,7 +185,7 @@ a .project-card:hover {
 
 .postit-header {
     height: 36px;
-    padding: 0 12px;
+    padding: 0 8px 0 4px; /* Ajustado ligeramente el padding para encajar los 24px */
     display: flex;
     align-items: center;
     cursor: move;
@@ -195,22 +194,24 @@ a .project-card:hover {
     user-select: none;
 }
 
-/* Controlador izquierdo de arrastre (6 puntitos en rejilla 2x3) */
+/* Controlador izquierdo de arrastre acotado a un máximo de 24px */
 .postit-drag-handle {
-    width: 18px;
+    width: 24px;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center; /* Centra los puntitos dentro del bloque rígido de 24px */
     opacity: 0.3;
     transition: opacity 0.15s ease;
     cursor: move;
+    flex-shrink: 0;
 }
 
 .postit-header:hover .postit-drag-handle {
     opacity: 0.6;
 }
 
+/* Patrón táctil industrial compacto de 6 puntos */
 .postit-drag-handle::after {
     content: "";
     width: 10px;
@@ -220,18 +221,18 @@ a .project-card:hover {
     background-repeat: repeat;
 }
 
-/* Microcopy minimalista */
+/* Microcopy minimalista alineado perfectamente */
 .postit-title-area {
     font-size: 11px;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.35);
     letter-spacing: 0.08em;
-    margin-right: auto; /* Desplaza el resto de elementos y botones a la derecha */
+    margin-right: auto; /* Empuja el menú de botones al final derecho */
     flex-shrink: 0;
     user-select: none;
 }
 
-/* Estilización simétrica de los botones de interacción */
+/* Botones de control simétricos */
 .postit-btn {
     background: none;
     border: none;
@@ -263,14 +264,13 @@ a .project-card:hover {
     color: #111;
 }
 
-/* Área interna de entrada de texto */
+/* Editor de texto */
 .postit-body {
     flex-grow: 1;
     padding: 4px 12px;
     display: flex;
 }
 
-/* Ocultar elementos sobrantes al colapsar */
 .postit-container.minimized .postit-body,
 .postit-container.minimized .postit-footer {
     display: none;
@@ -293,7 +293,7 @@ a .project-card:hover {
     outline: none;
 }
 
-/* Pie de la nota */
+/* Footer con selector de color */
 .postit-footer {
     height: 34px;
     padding: 0 12px;
