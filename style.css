@@ -36,13 +36,6 @@ body {
     margin-bottom: 72px;
 }
 
-.brand-name {
-    color: var(--text-muted);
-    font-size: 14px;
-    font-weight: 450;
-    letter-spacing: -0.01em;
-}
-
 h1 {
     font-size: 24px;
     font-weight: 500;
@@ -185,7 +178,7 @@ a .project-card:hover {
 
 .postit-header {
     height: 36px;
-    padding: 0 8px 0 4px; /* Ajustado ligeramente el padding para encajar los 24px */
+    padding: 0 8px 0 4px;
     display: flex;
     align-items: center;
     cursor: move;
@@ -194,13 +187,13 @@ a .project-card:hover {
     user-select: none;
 }
 
-/* Controlador izquierdo de arrastre acotado a un máximo de 24px */
+/* Controlador izquierdo optimizado a 32px y centrado */
 .postit-drag-handle {
-    width: 32px;
+    width: 32px; 
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centra los puntitos dentro del bloque rígido de 24px */
+    justify-content: center; 
     opacity: 0.3;
     transition: opacity 0.15s ease;
     cursor: move;
@@ -211,28 +204,28 @@ a .project-card:hover {
     opacity: 0.6;
 }
 
-/* Patrón táctil industrial compacto de 6 puntos */
+/* Icono de 6 puntos ampliado a 12px de lienzo para evitar cortes ópticos */
 .postit-drag-handle::after {
     content: "";
-    width: 12px;
-    height: 12px;
+    width: 12px;  
+    height: 12px; 
     background-image: radial-gradient(circle, #000 1px, transparent 1.5px);
     background-size: 4px 4px;
     background-repeat: repeat;
 }
 
-/* Microcopy minimalista alineado perfectamente */
+/* Microcopy de la cabecera */
 .postit-title-area {
     font-size: 11px;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.35);
     letter-spacing: 0.08em;
-    margin-right: auto; /* Empuja el menú de botones al final derecho */
+    margin-right: auto; 
     flex-shrink: 0;
     user-select: none;
 }
 
-/* Botones de control simétricos */
+/* Botones superiores */
 .postit-btn {
     background: none;
     border: none;
@@ -264,7 +257,7 @@ a .project-card:hover {
     color: #111;
 }
 
-/* Editor de texto */
+/* Editor interno */
 .postit-body {
     flex-grow: 1;
     padding: 4px 12px;
@@ -293,7 +286,7 @@ a .project-card:hover {
     outline: none;
 }
 
-/* Footer con selector de color */
+/* Footer y selectores */
 .postit-footer {
     height: 34px;
     padding: 0 12px;
@@ -323,7 +316,7 @@ a .project-card:hover {
 .color-blue { background-color: #EBF3FF; }
 .color-pink { background-color: #FDEBFF; }
 
-/* --- RESPONSIVE OPTIMIZATION (Mobile Viewports) --- */
+/* --- OPTIMIZACIÓN MÓVIL --- */
 @media (max-width: 600px) {
     .postit-container {
         max-width: calc(100% - 32px) !important;
