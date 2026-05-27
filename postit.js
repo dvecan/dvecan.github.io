@@ -1,4 +1,4 @@
-// Versión Mobile-First con soporte Touch & Drag Handle
+// Versión con tirador a la izquierda del título y soporte móvil unificado
 (() => {
     const postit = document.createElement('div');
     postit.id = 'sticky-postit';
@@ -6,8 +6,8 @@
     
     postit.innerHTML = `
         <div class="postit-header" id="postit-header">
-            <div class="postit-title-area">NOTA</div>
-            <div class="postit-drag-handle"></div> <button class="postit-btn" id="postit-min-btn" title="Minimizar / Maximizar">—</button>
+            <div class="postit-drag-handle"></div> <div class="postit-title-area">NOTA</div>
+            <button class="postit-btn" id="postit-min-btn" title="Minimizar / Maximizar">—</button>
             <button class="postit-btn" id="postit-close-btn" title="Borrar contenido">×</button>
         </div>
         <div class="postit-body" id="postit-body">
@@ -45,7 +45,6 @@
         minimized: false
     };
 
-    // Ajuste responsivo de posición inicial (para que no aparezca fuera de la pantalla en móvil)
     let initialX = savedState.x;
     let initialY = savedState.y;
     if (window.innerWidth < 600) {
@@ -95,11 +94,10 @@
     window.addEventListener('mouseup', () => { if (!postit.classList.contains('minimized')) saveState(); });
     window.addEventListener('touchend', () => { if (!postit.classList.contains('minimized')) saveState(); });
 
-    // --- LÓGICA DE ARRASTRE UNIFICADA (Ratón y Táctil) ---
+    // Lógica de Arrastre
     let isDragging = false;
     let startX, startY, initialLeft, initialTop;
 
-    // Funciones comunes de movimiento
     function startDrag(clientX, clientY) {
         isDragging = true;
         startX = clientX;
@@ -114,7 +112,6 @@
         let newX = initialLeft + (clientX - startX);
         let newY = initialTop + (clientY - startY);
 
-        // Evitar que el usuario arrastre la nota completamente fuera de los márgenes visibles
         const maxW = window.innerWidth;
         const maxH = window.innerHeight;
         if (newX < -100) newX = -100;
@@ -133,7 +130,6 @@
         }
     }
 
-    // Listeners para Ratón
     header.addEventListener('mousedown', (e) => {
         if (e.target.classList.contains('postit-btn')) return;
         startDrag(e.clientX, e.clientY);
@@ -147,10 +143,8 @@
         document.addEventListener('mouseup', mouseUpHandler);
     });
 
-    // Listeners para Pantallas Táctiles (Mobile)
     header.addEventListener('touchstart', (e) => {
         if (e.target.classList.contains('postit-btn')) return;
-        // Evita el scroll nativo del body mientras arrastramos la nota
         e.preventDefault();
         const touch = e.touches[0];
         startDrag(touch.clientX, touch.clientY);
@@ -165,7 +159,6 @@
 
     header.addEventListener('touchend', endDrag);
 
-    // Cambio de Color
     colorDots.forEach(dot => {
         dot.addEventListener('click', () => {
             colorDots.forEach(d => d.classList.remove('active'));
@@ -175,7 +168,6 @@
         });
     });
 
-    // Minimizar / Maximizar
     minBtn.addEventListener('click', () => {
         const isMin = postit.classList.toggle('minimized');
         if (isMin) {
@@ -189,7 +181,6 @@
         saveState();
     });
 
-    // Resetear contenido
     closeBtn.addEventListener('click', () => {
         if (confirm("¿Quieres borrar las notas guardadas en este post-it?")) {
             textarea.value = '';
