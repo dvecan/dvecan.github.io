@@ -159,7 +159,7 @@ a .project-card:hover {
     margin-bottom: 28px;
 }
 
-/* --- COMPONENTE POST-IT (Mobile-First y Optimizado) --- */
+/* --- COMPONENTE NOTA (Mobile-First y UI Ajustada) --- */
 .postit-container {
     position: fixed;
     z-index: 9999;
@@ -175,7 +175,7 @@ a .project-card:hover {
     overflow: hidden;
     resize: both;
     box-sizing: border-box;
-    touch-action: none; /* Evita scrolls parásitos al arrastrar en pantallas táctiles */
+    touch-action: none; /* Evita scrolls accidentales en pantallas táctiles */
 }
 
 /* Bloqueo de redimensionado en estado colapsado */
@@ -195,39 +195,40 @@ a .project-card:hover {
     user-select: none;
 }
 
+/* Controlador izquierdo de arrastre (6 puntitos en rejilla 2x3) */
+.postit-drag-handle {
+    width: 18px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    opacity: 0.3;
+    transition: opacity 0.15s ease;
+    cursor: move;
+}
+
+.postit-header:hover .postit-drag-handle {
+    opacity: 0.6;
+}
+
+.postit-drag-handle::after {
+    content: "";
+    width: 10px;
+    height: 12px;
+    background-image: radial-gradient(circle, #000 1px, transparent 1.5px);
+    background-size: 4px 4px;
+    background-repeat: repeat;
+}
+
+/* Microcopy minimalista */
 .postit-title-area {
     font-size: 11px;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.35);
     letter-spacing: 0.08em;
-    margin-right: 12px;
+    margin-right: auto; /* Desplaza el resto de elementos y botones a la derecha */
     flex-shrink: 0;
-}
-
-/* Tirador central (Drag Handle) para mejorar la UX en mobile */
-.postit-drag-handle {
-    flex-grow: 1;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.25;
-    transition: opacity 0.15s ease;
-    padding-right: 8px;
-}
-
-.postit-header:hover .postit-drag-handle {
-    opacity: 0.5;
-}
-
-/* Patrón visual industrial de 6 puntos */
-.postit-drag-handle::after {
-    content: "";
-    width: 16px;
-    height: 8px;
-    background-image: radial-gradient(circle, #000 1px, transparent 1.5px);
-    background-size: 4px 4px;
-    background-repeat: repeat;
+    user-select: none;
 }
 
 /* Estilización simétrica de los botones de interacción */
@@ -262,7 +263,7 @@ a .project-card:hover {
     color: #111;
 }
 
-/* Área interna de texto */
+/* Área interna de entrada de texto */
 .postit-body {
     flex-grow: 1;
     padding: 4px 12px;
@@ -292,7 +293,7 @@ a .project-card:hover {
     outline: none;
 }
 
-/* Pie de la nota limpio */
+/* Pie de la nota */
 .postit-footer {
     height: 34px;
     padding: 0 12px;
@@ -322,12 +323,11 @@ a .project-card:hover {
 .color-blue { background-color: #EBF3FF; }
 .color-pink { background-color: #FDEBFF; }
 
-/* --- RESPONSIVE OPTIMIZATION (Mobile-First Viewports) --- */
+/* --- RESPONSIVE OPTIMIZATION (Mobile Viewports) --- */
 @media (max-width: 600px) {
     .postit-container {
         max-width: calc(100% - 32px) !important;
     }
-    /* Área táctil expandida sutilmente en mobile para los botones */
     .postit-btn {
         width: 28px;
         height: 28px;
