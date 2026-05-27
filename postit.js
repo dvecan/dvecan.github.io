@@ -1,5 +1,12 @@
-// Versión con tirador a la izquierda del título y soporte móvil unificado
+// Versión con tirador a la izquierda del título, soporte móvil desactivado y escritorio limpio
 (() => {
+    // 1. GUARDIA PERIMETRAL: Si detecta un móvil o pantalla inferior a 600px, aborta y no ejecuta nada
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 600) {
+        console.log("Componente Nota: Desactivado en dispositivos móviles.");
+        return; 
+    }
+
+    // 2. LÓGICA DE ESCRITORIO (Se ejecuta únicamente si pasa la guardia anterior)
     const postit = document.createElement('div');
     postit.id = 'sticky-postit';
     postit.className = 'postit-container';
@@ -47,15 +54,11 @@
 
     let initialX = savedState.x;
     let initialY = savedState.y;
-    if (window.innerWidth < 600) {
-        if (initialX > window.innerWidth - 100) initialX = 16;
-        if (initialY > window.innerHeight - 100) initialY = window.innerHeight - 280;
-    }
 
     textarea.value = savedState.text || '';
     postit.style.left = (initialX !== undefined ? initialX : 20) + 'px';
     postit.style.top = (initialY !== undefined ? initialY : 120) + 'px';
-    postit.style.width = (window.innerWidth < 600 ? Math.min(savedState.width || 240, window.innerWidth - 32) : (savedState.width || 240)) + 'px';
+    postit.style.width = (savedState.width || 240) + 'px';
     postit.style.height = savedState.minimized ? '36px' : (savedState.height || 240) + 'px';
     postit.style.backgroundColor = savedState.color || 'rgb(253, 255, 244)';
     
@@ -92,9 +95,8 @@
 
     textarea.addEventListener('input', saveState);
     window.addEventListener('mouseup', () => { if (!postit.classList.contains('minimized')) saveState(); });
-    window.addEventListener('touchend', () => { if (!postit.classList.contains('minimized')) saveState(); });
 
-    // Lógica de Arrastre
+    // Lógica de Arrastre (Escritorio)
     let isDragging = false;
     let startX, startY, initialLeft, initialTop;
 
@@ -142,22 +144,6 @@
         document.addEventListener('mousemove', mouseMoveHandler);
         document.addEventListener('mouseup', mouseUpHandler);
     });
-
-    header.addEventListener('touchstart', (e) => {
-        if (e.target.classList.contains('postit-btn')) return;
-        e.preventDefault();
-        const touch = e.touches[0];
-        startDrag(touch.clientX, touch.clientY);
-    }, { passive: false });
-
-    header.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
-        e.preventDefault();
-        const touch = e.touches[0];
-        moveDrag(touch.clientX, touch.clientY);
-    }, { passive: false });
-
-    header.addEventListener('touchend', endDrag);
 
     colorDots.forEach(dot => {
         dot.addEventListener('click', () => {
