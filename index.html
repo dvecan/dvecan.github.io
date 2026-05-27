@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         
-        <!-- Cabecera limpia sin entrypoints -->
+        <!-- Cabecera minimalista -->
         <header class="header-main">
             <span class="brand-name">tu nombre</span>
         </header>
@@ -26,11 +26,12 @@
                 </p>
             </section>
 
-            <!-- Sección Proyectos -->
+            <!-- Sección Proyectos (Protegido con contraseña) -->
             <section id="projects">
                 <h2>Proyectos</h2>
                 <div class="list">
-                    <a href="proyectos/proyecto-1.html" class="item">
+                    <!-- Al hacer clic, ejecuta la función de seguridad en lugar de ir directo al archivo -->
+                    <a href="#" class="item" onclick="accederProyecto(event)">
                         <span class="title">Diseño de una App de Gestión</span>
                         <span class="dots"></span>
                         <span class="year">2026</span>
@@ -38,7 +39,7 @@
                 </div>
             </section>
 
-            <!-- Sección Artículos -->
+            <!-- Sección Artículos (Público) -->
             <section id="writing">
                 <h2>Artículos</h2>
                 <div class="list">
@@ -51,5 +52,31 @@
             </section>
         </main>
     </div>
+
+    <!-- Script de seguridad criptográfica SHA-256 -->
+    <script>
+    async function accederProyecto(event) {
+        event.preventDefault(); 
+        
+        // 1. Pedir la contraseña de forma limpia
+        const password = prompt("Este proyecto es confidencial. Introduce la contraseña:");
+        if (!password) return; 
+
+        // 2. Encriptar la entrada del usuario en SHA-256
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        
+        // Extraemos los primeros 8 caracteres
+        const codigoArchivo = hashHex.substring(0, 8);
+
+        // 3. Redirección automática
+        // Si escribe "cabify2023", codigoArchivo será "64049830" e irá al archivo real.
+        // Si escribe cualquier otra cosa, irá a un archivo inexistente y dará un error 404 seguro.
+        window.location.href = `proyectos/${codigoArchivo}.html`;
+    }
+    </script>
 </body>
 </html>
