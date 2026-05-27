@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
+// Ejecución inmediata e independiente para evitar bloqueos en subcarpetas de GitHub Pages
+(() => {
     // 1. Crear la estructura HTML del Post-it dinámicamente
     const postit = document.createElement('div');
     postit.id = 'sticky-postit';
@@ -25,7 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-    document.body.appendChild(postit);
+    // Asegurar la inyección en el body independientemente del estado de carga del DOM
+    if (document.body) {
+        document.body.appendChild(postit);
+    } else {
+        window.addEventListener('DOMContentLoaded', () => document.body.appendChild(postit));
+    }
 
     const header = document.getElementById('postit-header');
     const textarea = document.getElementById('postit-input');
@@ -155,4 +161,4 @@ document.addEventListener('DOMContentLoaded', () => {
             saveState();
         }
     });
-});
+})();
