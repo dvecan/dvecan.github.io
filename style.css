@@ -1,0 +1,167 @@
+:root {
+    /* Tu nuevo fondo gris limpio y neutro */
+    --bg: #F7F7F7;
+    
+    /* Contraste tipográfico */
+    --text: #111111;
+    --text-muted: #686868;
+    --accent: #000000;
+    --line: #e2e2e2; /* Puntos de la lista adaptados al nuevo gris */
+    --border-subtle: rgba(0, 0, 0, 0.05); /* Borde ultrafino para imágenes */
+    
+    --font: 'Geist Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 640px;
+    width: 100%;
+    padding: 120px 24px 80px 24px;
+}
+
+/* Cabecera minimalista */
+.header-main {
+    margin-bottom: 72px;
+}
+
+.brand-name {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 450;
+    letter-spacing: -0.01em;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.03em;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin: 0 0 32px 0;
+}
+
+.description {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #242424;
+    margin-bottom: 64px;
+}
+
+h2 {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: 64px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* --- LISTAS E INTERACCIONES --- */
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.item {
+    display: flex;
+    align-items: baseline;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 15px;
+    padding: 10px 0;
+    transition: color 0.2s ease;
+}
+
+.item:hover {
+    color: var(--accent);
+}
+
+.dots {
+    flex-grow: 1;
+    border-bottom: 1px dashed var(--line);
+    margin: 0 16px;
+    position: relative;
+    top: -4px;
+    transition: border-color 0.2s ease;
+}
+
+.item:hover .dots {
+    border-bottom-color: #aaaaaa;
+}
+
+.year {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.2s ease;
+}
+
+.item:hover .year {
+    color: var(--accent);
+}
+
+/* --- CORNERS E IMÁGENES (ESTILO AGENTS WITH TASTE) --- */
+.project-card, .featured-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px; 
+    border: 1px solid var(--border-subtle); 
+    
+    /* Sombra extremadamente suave que funciona de lujo sobre el fondo #F7F7F7 */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015), 
+                0 1px 2px rgba(0, 0, 0, 0.02);
+    
+    margin: 32px 0;
+    display: block;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+a .project-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Páginas internas */
+.back-link {
+    display: inline-block;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 48px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--accent);
+    transform: translateX(-2px);
+}
+
+.content {
+    line-height: 1.75;
+    font-size: 15px;
+    color: #1c1c1c;
+}
+
+.content p {
+    margin-bottom: 28px;
+}
