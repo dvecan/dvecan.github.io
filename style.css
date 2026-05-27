@@ -196,7 +196,7 @@ a .project-card:hover {
 
 /* Controlador izquierdo de arrastre acotado a un máximo de 24px */
 .postit-drag-handle {
-    width: 24px;
+    width: 32px;
     height: 100%;
     display: flex;
     align-items: center;
