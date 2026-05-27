@@ -49,6 +49,26 @@
 
     </main>
 
+    <script>
+    async function accederProyecto(event) {
+        event.preventDefault(); 
+        
+        const password = prompt("Este proyecto es confidencial. Introduce la contraseña:");
+        if (!password) return; 
+
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        
+        const codigoArchivo = hashHex.substring(0, 8);
+
+        // CORRECCIÓN CLAVE: Ruta relativa para que funcione correctamente dentro del subdominio de GitHub Pages
+        window.location.href = `proyectos/${codigoArchivo}.html`;
+    }
+    </script>
+
     <script src="postit.js" defer></script>
 </body>
 </html>
