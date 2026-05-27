@@ -1,14 +1,14 @@
-// Ejecución inmediata e independiente para evitar bloqueos en subcarpetas de GitHub Pages
+// Versión optimizada con UI pulida y control dinámico de estados
 (() => {
-    // 1. Crear la estructura HTML del Post-it dinámicamente
+    // 1. Crear la estructura HTML del Post-it sin elementos innecesarios
     const postit = document.createElement('div');
     postit.id = 'sticky-postit';
     postit.className = 'postit-container';
     
     postit.innerHTML = `
         <div class="postit-header" id="postit-header">
-            <div class="postit-dots-orange"></div>
-            <button class="postit-btn" id="postit-min-btn" title="Minimizar">—</button>
+            <div class="postit-title-area">Nota personal</div>
+            <button class="postit-btn" id="postit-min-btn" title="Minimizar / Maximizar">—</button>
             <button class="postit-btn" id="postit-close-btn" title="Borrar contenido">×</button>
         </div>
         <div class="postit-body" id="postit-body">
@@ -20,13 +20,9 @@
                 <span class="color-dot color-blue" data-color="#EBF3FF"></span>
                 <span class="color-dot color-pink" data-color="#FDEBFF"></span>
             </div>
-            <div class="postit-status-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
             </div>
-        </div>
     `;
 
-    // Asegurar la inyección en el body independientemente del estado de carga del DOM
     if (document.body) {
         document.body.appendChild(postit);
     } else {
@@ -50,7 +46,7 @@
         minimized: false
     };
 
-    // Aplicar estado guardado con consistencia matemática
+    // Aplicar estado guardado
     textarea.value = savedState.text || '';
     postit.style.left = (savedState.x !== undefined ? savedState.x : 40) + 'px';
     postit.style.top = (savedState.y !== undefined ? savedState.y : 140) + 'px';
@@ -60,9 +56,14 @@
     
     if (savedState.minimized) {
         postit.classList.add('minimized');
+        minBtn.textContent = '+'; // Cambia a "+" si se guardó minimizado
+        minBtn.title = "Maximizar";
+    } else {
+        minBtn.textContent = '—';
+        minBtn.title = "Minimizar";
     }
 
-    // Identificar y activar visualmente el color guardado
+    // Activar visualmente el circulito del color correspondiente
     colorDots.forEach(dot => {
         const tempDiv = document.createElement('div');
         tempDiv.style.color = dot.getAttribute('data-color');
@@ -76,7 +77,7 @@
         }
     });
 
-    // 3. Función unificada para persistir cambios en localStorage
+    // 3. Función para persistir cambios en localStorage
     function saveState() {
         const isMin = postit.classList.contains('minimized');
         const state = {
@@ -91,17 +92,15 @@
         localStorage.setItem('web-postit-state', JSON.stringify(state));
     }
 
-    // Guardar texto de forma reactiva al teclear
     textarea.addEventListener('input', saveState);
 
-    // Guardar dimensiones definitivas al soltar el ratón tras redimensionar
     window.addEventListener('mouseup', () => {
         if (!postit.classList.contains('minimized')) {
             saveState();
         }
     });
 
-    // 4. Lógica nativa de Arrastre (Drag and Drop)
+    // 4. Lógica de Arrastre (Drag and Drop)
     let isDragging = false;
     let startX, startY, initialLeft, initialTop;
 
@@ -142,19 +141,23 @@
         });
     });
 
-    // 6. Colapsar / Expandir (Minimizar)
+    // 6. Colapsar / Expandir Dinámico (Minimizar / Maximizar)
     minBtn.addEventListener('click', () => {
         const isMin = postit.classList.toggle('minimized');
         if (isMin) {
             savedState.height = parseInt(postit.style.height) || 240; 
             postit.style.height = '36px';
+            minBtn.textContent = '+'; // Cambia el icono para reflejar que se puede expandir
+            minBtn.title = "Maximizar";
         } else {
             postit.style.height = (savedState.height || 240) + 'px';
+            minBtn.textContent = '—'; // Vuelve al estado normal
+            minBtn.title = "Minimizar";
         }
         saveState();
     });
 
-    // 7. Resetear Contenido
+    // 7. Resetear Contenido con confirmación sutil
     closeBtn.addEventListener('click', () => {
         if (confirm("¿Quieres borrar las notas guardadas en este post-it?")) {
             textarea.value = '';
