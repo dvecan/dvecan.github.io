@@ -40,49 +40,67 @@ document.addEventListener('DOMContentLoaded', () => {
         y: 140,
         width: 240,
         height: 240,
-        color: '#FDFFF4',
+        color: 'rgb(253, 255, 244)', 
         minimized: false
     };
 
-    // Aplicar estado guardado
-    textarea.value = savedState.text;
-    postit.style.left = savedState.x + 'px';
-    postit.style.top = savedState.y + 'px';
-    postit.style.width = savedState.width + 'px';
-    postit.style.height = savedState.minimized ? '36px' : savedState.height + 'px';
-    postit.style.backgroundColor = savedState.color;
-    if(savedState.minimized) postit.classList.add('minimized');
+    // Aplicar estado guardado con consistencia matemática
+    textarea.value = savedState.text || '';
+    postit.style.left = (savedState.x !== undefined ? savedState.x : 40) + 'px';
+    postit.style.top = (savedState.y !== undefined ? savedState.y : 140) + 'px';
+    postit.style.width = (savedState.width || 240) + 'px';
+    postit.style.height = savedState.minimized ? '36px' : (savedState.height || 240) + 'px';
+    postit.style.backgroundColor = savedState.color || 'rgb(253, 255, 244)';
+    
+    if (savedState.minimized) {
+        postit.classList.add('minimized');
+    }
 
+    // Identificar y activar visualmente el color guardado
     colorDots.forEach(dot => {
-        if(dot.getAttribute('data-color') === savedState.color) {
+        const tempDiv = document.createElement('div');
+        tempDiv.style.color = dot.getAttribute('data-color');
+        document.body.appendChild(tempDiv);
+        const dotStyleColor = window.getComputedStyle(tempDiv).color;
+        document.body.removeChild(tempDiv);
+
+        if (dotStyleColor === savedState.color || dot.getAttribute('data-color') === savedState.color) {
             colorDots.forEach(d => d.classList.remove('active'));
             dot.classList.add('active');
         }
     });
 
-    // 3. Función para guardar estado de forma unificada
+    // 3. Función unificada para persistir cambios en localStorage
     function saveState() {
         const isMin = postit.classList.contains('minimized');
         const state = {
             text: textarea.value,
-            x: parseInt(postit.style.left),
-            y: parseInt(postit.style.top),
+            x: parseInt(postit.style.left) || 40,
+            y: parseInt(postit.style.top) || 140,
             width: parseInt(postit.style.width) || 240,
             height: isMin ? (savedState.height || 240) : parseInt(postit.style.height) || 240,
-            color: postit.style.backgroundColor || '#FDFFF4',
+            color: window.getComputedStyle(postit).backgroundColor,
             minimized: isMin
         };
         localStorage.setItem('web-postit-state', JSON.stringify(state));
     }
 
+    // Guardar texto de forma reactiva al teclear
     textarea.addEventListener('input', saveState);
 
-    // 4. Lógica para Arrastrar (Drag and Drop)
+    // Guardar dimensiones definitivas al soltar el ratón tras redimensionar
+    window.addEventListener('mouseup', () => {
+        if (!postit.classList.contains('minimized')) {
+            saveState();
+        }
+    });
+
+    // 4. Lógica nativa de Arrastre (Drag and Drop)
     let isDragging = false;
     let startX, startY, initialLeft, initialTop;
 
     header.addEventListener('mousedown', (e) => {
-        if(e.target.classList.contains('postit-btn')) return;
+        if (e.target.classList.contains('postit-btn')) return;
         isDragging = true;
         startX = e.clientX;
         startY = e.clientY;
@@ -100,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function stopDrag() {
-        if(isDragging) {
+        if (isDragging) {
             isDragging = false;
             saveState();
             document.removeEventListener('mousemove', drag);
@@ -108,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 5. Cambio de Color
+    // 5. Conmutador de Colores
     colorDots.forEach(dot => {
         dot.addEventListener('click', () => {
             colorDots.forEach(d => d.classList.remove('active'));
@@ -118,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 6. Minimizar / Maximizar
+    // 6. Colapsar / Expandir (Minimizar)
     minBtn.addEventListener('click', () => {
         const isMin = postit.classList.toggle('minimized');
         if (isMin) {
@@ -130,35 +148,11 @@ document.addEventListener('DOMContentLoaded', () => {
         saveState();
     });
 
-    // 7. Borrar contenido
+    // 7. Resetear Contenido
     closeBtn.addEventListener('click', () => {
-        if(confirm("¿Quieres borrar las notas guardadas en este post-it?")) {
+        if (confirm("¿Quieres borrar las notas guardadas en este post-it?")) {
             textarea.value = '';
             saveState();
-        }
-    });
-
-    // 8. Observador de Redimensionado (Resize Observer)
-    const resizeObserver = new ResizeObserver(entries => {
-        for (let entry of entries) {
-            if (postit.classList.contains('minimized')) return;
-            const width = entry.contentRect.width;
-            const height = entry.contentRect.height;
-            if(width > 0 && height > 0) {
-                postit.style.width = width + 'px';
-                postit.style.height = height + 'px';
-                saveState();
-            }
-        }
-    });
-
-    if(!savedState.minimized) resizeObserver.observe(postit);
-    
-    minBtn.addEventListener('click', () => {
-        if(!postit.classList.contains('minimized')) {
-            resizeObserver.observe(postit);
-        } else {
-            resizeObserver.unobserve(postit);
         }
     });
 });
