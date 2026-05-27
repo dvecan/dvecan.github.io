@@ -286,6 +286,19 @@ a .project-card:hover {
     outline: none;
 }
 
+/* --- OPTIMIZACIÓN MÓVIL --- */
+@media (max-width: 600px) {
+    /* Oculta por completo la funcionalidad de la Nota en iPhone y móviles */
+    .postit-container {
+        display: none !important;
+    }
+    
+    .postit-btn {
+        width: 28px;
+        height: 28px;
+    }
+}
+
 /* Footer y selectores */
 .postit-footer {
     height: 34px;
