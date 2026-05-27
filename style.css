@@ -115,7 +115,7 @@ h2 {
     color: var(--accent);
 }
 
-/* Tratamiento de imágenes estilo Agents with taste */
+/* Tratamiento de imágenes estilo Agents with Taste */
 .project-card, .featured-image {
     width: 100%;
     height: auto;
@@ -154,4 +154,136 @@ a .project-card:hover {
 
 .content p {
     margin-bottom: 28px;
+}
+
+/* --- ESTILOS COMPONENTE POST-IT --- */
+.postit-container {
+    position: fixed;
+    z-index: 9999;
+    min-width: 180px;
+    min-height: 36px;
+    max-width: 450px;
+    max-height: 450px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    resize: both;
+    box-sizing: border-box;
+}
+
+.postit-container.minimized {
+    resize: none !important;
+    height: 36px !important;
+}
+
+.postit-header {
+    height: 36px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    cursor: move;
+    background: rgba(0, 0, 0, 0.01);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    user-select: none;
+}
+
+.postit-dots-orange {
+    width: 6px;
+    height: 6px;
+    background-color: #ff605c;
+    border-radius: 50%;
+    margin-right: auto;
+}
+
+.postit-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 14px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+    border-radius: 4px;
+    transition: background 0.15s;
+}
+
+.postit-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #111;
+}
+
+.postit-body {
+    flex-grow: 1;
+    padding: 4px 12px;
+    display: flex;
+}
+
+.postit-container.minimized .postit-body,
+.postit-container.minimized .postit-footer {
+    display: none;
+}
+
+#postit-input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    resize: none;
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #222;
+    padding: 4px 0;
+}
+
+#postit-input:focus {
+    outline: none;
+}
+
+.postit-footer {
+    height: 34px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.postit-colors {
+    display: flex;
+    gap: 6px;
+}
+
+.color-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s ease;
+}
+
+.color-dot:hover {
+    transform: scale(1.15);
+}
+
+.color-dot.active {
+    box-shadow: 0 0 0 1.5px #111;
+}
+
+.color-yellow { background-color: #FDFFF4; }
+.color-blue { background-color: #EBF3FF; }
+.color-pink { background-color: #FDEBFF; }
+
+.postit-status-icon {
+    color: #999;
+    display: flex;
+    align-items: center;
 }
