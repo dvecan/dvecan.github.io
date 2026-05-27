@@ -1,14 +1,10 @@
 :root {
-    /* Tu nuevo fondo gris limpio y neutro */
     --bg: #F7F7F7;
-    
-    /* Contraste tipográfico */
     --text: #111111;
     --text-muted: #686868;
     --accent: #000000;
-    --line: #e2e2e2; /* Puntos de la lista adaptados al nuevo gris */
-    --border-subtle: rgba(0, 0, 0, 0.05); /* Borde ultrafino para imágenes */
-    
+    --line: #e2e2e2; 
+    --border-subtle: rgba(0, 0, 0, 0.05); 
     --font: 'Geist Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -34,7 +30,6 @@ body {
     padding: 120px 24px 80px 24px;
 }
 
-/* Cabecera minimalista */
 .header-main {
     margin-bottom: 72px;
 }
@@ -76,7 +71,6 @@ h2 {
     letter-spacing: 0.06em;
 }
 
-/* --- LISTAS E INTERACCIONES --- */
 .list {
     display: flex;
     flex-direction: column;
@@ -121,17 +115,14 @@ h2 {
     color: var(--accent);
 }
 
-/* --- CORNERS E IMÁGENES (ESTILO AGENTS WITH TASTE) --- */
+/* Tratamiento de imágenes estilo Agents with taste */
 .project-card, .featured-image {
     width: 100%;
     height: auto;
     border-radius: 12px; 
     border: 1px solid var(--border-subtle); 
-    
-    /* Sombra extremadamente suave que funciona de lujo sobre el fondo #F7F7F7 */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015), 
                 0 1px 2px rgba(0, 0, 0, 0.02);
-    
     margin: 32px 0;
     display: block;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -141,7 +132,6 @@ a .project-card:hover {
     transform: translateY(-2px);
 }
 
-/* Páginas internas */
 .back-link {
     display: inline-block;
     color: var(--text-muted);
