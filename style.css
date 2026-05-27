@@ -1,184 +1,3 @@
-:root {
-    --bg: #F7F7F7;
-    --text: #111111;
-    --text-muted: #686868;
-    --accent: #000000;
-    --line: #e2e2e2; 
-    --border-subtle: rgba(0, 0, 0, 0.05); 
-    --font: 'Geist Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-}
-
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
-body {
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: var(--font);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.container {
-    max-width: 640px;
-    width: 100%;
-    padding: 120px 24px 80px 24px;
-}
-
-.header-main {
-    margin-bottom: 72px;
-}
-
-.brand-name {
-    color: var(--text-muted);
-    font-size: 14px;
-    font-weight: 450;
-    letter-spacing: -0.01em;
-}
-
-h1 {
-    font-size: 24px;
-    font-weight: 500;
-    margin: 0 0 6px 0;
-    letter-spacing: -0.03em;
-}
-
-.subtitle {
-    color: var(--text-muted);
-    font-size: 14px;
-    margin: 0 0 32px 0;
-}
-
-.description {
-    font-size: 15px;
-    line-height: 1.65;
-    color: #242424;
-    margin-bottom: 64px;
-}
-
-h2 {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-muted);
-    margin-top: 64px;
-    margin-bottom: 24px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-}
-
-.list {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.item {
-    display: flex;
-    align-items: baseline;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 15px;
-    padding: 10px 0;
-    transition: color 0.2s ease;
-}
-
-.item:hover {
-    color: var(--accent);
-}
-
-.dots {
-    flex-grow: 1;
-    border-bottom: 1px dashed var(--line);
-    margin: 0 16px;
-    position: relative;
-    top: -4px;
-    transition: border-color 0.2s ease;
-}
-
-.item:hover .dots {
-    border-bottom-color: #aaaaaa;
-}
-
-.year {
-    color: var(--text-muted);
-    font-size: 14px;
-    font-variant-numeric: tabular-nums;
-    transition: color 0.2s ease;
-}
-
-.item:hover .year {
-    color: var(--accent);
-}
-
-/* Tratamiento de imágenes estilo Agents with Taste */
-.project-card, .featured-image {
-    width: 100%;
-    height: auto;
-    border-radius: 12px; 
-    border: 1px solid var(--border-subtle); 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015), 
-                0 1px 2px rgba(0, 0, 0, 0.02);
-    margin: 32px 0;
-    display: block;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-a .project-card:hover {
-    transform: translateY(-2px);
-}
-
-.back-link {
-    display: inline-block;
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 14px;
-    margin-bottom: 48px;
-    transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.back-link:hover {
-    color: var(--accent);
-    transform: translateX(-2px);
-}
-
-.content {
-    line-height: 1.75;
-    font-size: 15px;
-    color: #1c1c1c;
-}
-
-.content p {
-    margin-bottom: 28px;
-}
-
-/* --- ESTILOS COMPONENTE POST-IT --- */
-.postit-container {
-    position: fixed;
-    z-index: 9999;
-    min-width: 180px;
-    min-height: 36px;
-    max-width: 450px;
-    max-height: 450px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    resize: both;
-    box-sizing: border-box;
-}
-
-.postit-container.minimized {
-    resize: none !important;
-    height: 36px !important;
-}
-
 .postit-header {
     height: 36px;
     padding: 0 12px;
@@ -190,100 +9,47 @@ a .project-card:hover {
     user-select: none;
 }
 
-.postit-dots-orange {
-    width: 6px;
-    height: 6px;
-    background-color: #ff605c;
-    border-radius: 50%;
+/* Área de título para dar contexto sutil a la barra de arrastre */
+.postit-title-area {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
     margin-right: auto;
 }
 
+/* Equilibrio y consistencia visual en los botones */
 .postit-btn {
     background: none;
     border: none;
     color: #888;
-    font-size: 14px;
     cursor: pointer;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 4px;
+    margin-left: 2px;
     border-radius: 4px;
-    transition: background 0.15s;
+    transition: background 0.12s, color 0.12s;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+/* Ajustes individuales de fuentes para compensar pesos ópticos nativos */
+#postit-min-btn {
+    font-size: 11px; /* El guión se reduce para que no se vea gigante */
+    font-weight: bold;
+    padding-top: 1px;
+}
+
+#postit-close-btn {
+    font-size: 15px; /* La equis se equilibra con el tamaño del guión */
+    line-height: 1;
 }
 
 .postit-btn:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.06);
     color: #111;
-}
-
-.postit-body {
-    flex-grow: 1;
-    padding: 4px 12px;
-    display: flex;
-}
-
-.postit-container.minimized .postit-body,
-.postit-container.minimized .postit-footer {
-    display: none;
-}
-
-#postit-input {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    resize: none;
-    font-family: inherit;
-    font-size: 13px;
-    line-height: 1.5;
-    color: #222;
-    padding: 4px 0;
-}
-
-#postit-input:focus {
-    outline: none;
-}
-
-.postit-footer {
-    height: 34px;
-    padding: 0 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid rgba(0, 0, 0, 0.02);
-}
-
-.postit-colors {
-    display: flex;
-    gap: 6px;
-}
-
-.color-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    transition: transform 0.1s ease;
-}
-
-.color-dot:hover {
-    transform: scale(1.15);
-}
-
-.color-dot.active {
-    box-shadow: 0 0 0 1.5px #111;
-}
-
-.color-yellow { background-color: #FDFFF4; }
-.color-blue { background-color: #EBF3FF; }
-.color-pink { background-color: #FDEBFF; }
-
-.postit-status-icon {
-    color: #999;
-    display: flex;
-    align-items: center;
 }
