@@ -1,28 +1,46 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 — Página no encontrada</title>
+    <title>404 — Page Not Found</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/core.css">
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+
+    <!-- Language toggle (top-right, fixed) -->
+    <button id="lang-toggle" class="lang-toggle" aria-label="Switch to Spanish">ES</button>
+
     <div class="container">
-        
-        <a href="/index.html" class="back-link">← Volver al inicio</a>
+
+        <a href="/index.html" class="back-link" data-i18n="nav.back">← Back</a>
 
         <main style="margin-top: 40px;">
-            <section class="intro-section">
-                <h1 style="font-size: 48px; margin-bottom: 16px;">404</h1>
-                <p class="subtitle" style="font-size: 16px; margin-bottom: 24px;">Esta página no existe o el acceso está restringido.</p>
-                <p class="description">
-                    Si estabas intentando acceder a un proyecto protegido, es muy probable que hayas introducido una **contraseña incorrecta**. Los nombres de nuestros archivos confidenciales se generan criptográficamente, por lo que un código erróneo te traerá directamente aquí.
+            <section>
+                <h1 style="font-size: 48px; margin-bottom: 16px;" data-i18n="404.heading">
+                    404
+                </h1>
+                <p class="subtitle" data-i18n="404.tagline">
+                    This page does not exist or access is restricted.
+                </p>
+                <p class="description" data-i18n="404.body">
+                    If you were trying to access a protected project, you have most likely
+                    entered an incorrect password. Confidential file names are
+                    cryptographically generated, so a wrong code will bring you here.
                 </p>
             </section>
         </main>
+
     </div>
 
-    <script src="/postit.js" defer></script>
+    <script src="/i18n.js"></script>
+    <script src="/note.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            i18n.init();
+        });
+    </script>
+
 </body>
 </html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Thinking in Product Design — David Velasco</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/core.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <!-- Language toggle (top-right, fixed) -->
+    <button id="lang-toggle" class="lang-toggle" aria-label="Switch to Spanish">ES</button>
+
+    <div class="container">
+
+        <a href="../index.html" class="back-link" data-i18n="nav.back">← Back</a>
+
+        <main>
+            <section>
+                <h1 data-i18n="article1.title">Strategic Thinking in Product Design</h1>
+                <p class="subtitle" data-i18n="article1.subtitle">Article · 2026</p>
+            </section>
+
+            <article class="content">
+                <p data-i18n="article1.body.p1">
+                    Strategic thinking in product design means understanding not just
+                    what users need today, but what business goals, technical constraints,
+                    and market dynamics require over time. Great design is never purely
+                    aesthetic—it is the result of deliberate decisions grounded in context.
+                </p>
+                <p data-i18n="article1.body.p2">
+                    You can add images, explanatory videos in MP4, or paragraphs of text
+                    to detail your strategic design process.
+                </p>
+            </article>
+        </main>
+
+    </div>
+
+    <script src="../i18n.js"></script>
+    <script src="../note.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            i18n.init();
+        });
+    </script>
+
+</body>
+</html>

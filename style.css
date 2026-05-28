@@ -1,22 +1,59 @@
-/* --- VARIABLES GLOBALES Y PALETA (Gris minimalista) --- */
+/* =============================================================================
+   style.css — David Velasco Portfolio
+   Minimalist design system: global variables, layout, components, responsive
+   ============================================================================= */
+
+/* --- DESIGN TOKENS --------------------------------------------------------- */
 :root {
-    --bg: #F7F7F7;
-    --text: #111111;
-    --text-muted: #686868;
-    --accent: #000000;
-    --line: #e2e2e2; 
-    --border-subtle: rgba(0, 0, 0, 0.05); 
-    --font: 'Geist Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    /* Colors */
+    --color-bg:           #F7F7F7;
+    --color-text:         #111111;
+    --color-text-muted:   #686868;
+    --color-text-body:    #242424;
+    --color-accent:       #000000;
+    --color-line:         #e2e2e2;
+    --color-border:       rgba(0, 0, 0, 0.05);
+
+    /* Typography */
+    --font-family: 'Geist Sans', -apple-system, BlinkMacSystemFont,
+                   "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    /* Spacing scale */
+    --space-xs:   6px;
+    --space-sm:   16px;
+    --space-md:   24px;
+    --space-lg:   32px;
+    --space-xl:   48px;
+    --space-2xl:  64px;
+    --space-3xl:  72px;
+
+    /* Layout */
+    --content-max-width: 640px;
+    --content-padding-top: 120px;
+    --content-padding-bottom: 80px;
+
+    /* Note widget */
+    --note-min-width:  160px;
+    --note-max-width:  450px;
+    --note-max-height: 450px;
+    --note-header-height: 36px;
+    --note-border-radius: 8px;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* --- RESET ----------------------------------------------------------------- */
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
+/* --- BASE ------------------------------------------------------------------ */
 body {
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: var(--font);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-family);
     margin: 0;
     padding: 0;
     display: flex;
@@ -25,48 +62,75 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* --- CONTENEDOR PRINCIPAL Y MAQUETACIÓN --- */
+/* --- LAYOUT ---------------------------------------------------------------- */
 .container {
-    max-width: 640px;
+    max-width: var(--content-max-width);
     width: 100%;
-    padding: 120px 24px 80px 24px;
+    padding: var(--content-padding-top) var(--space-md) var(--content-padding-bottom);
 }
 
+/* --- HEADER --------------------------------------------------------------- */
 .header-main {
-    margin-bottom: 72px;
+    margin-bottom: var(--space-3xl);
 }
 
+/* Language toggle button (top-right corner) */
+.lang-toggle {
+    position: fixed;
+    top: var(--space-md);
+    right: var(--space-md);
+    background: none;
+    border: 1px solid var(--color-line);
+    border-radius: 6px;
+    font-family: var(--font-family);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    padding: 5px 10px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: color var(--transition-fast),
+                border-color var(--transition-fast);
+    z-index: 100;
+}
+
+.lang-toggle:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+/* --- TYPOGRAPHY ------------------------------------------------------------ */
 h1 {
     font-size: 24px;
     font-weight: 500;
-    margin: 0 0 6px 0;
+    margin: 0 0 var(--space-xs) 0;
     letter-spacing: -0.03em;
-}
-
-.subtitle {
-    color: var(--text-muted);
-    font-size: 14px;
-    margin: 0 0 32px 0;
-}
-
-.description {
-    font-size: 15px;
-    line-height: 1.65;
-    color: #242424;
-    margin-bottom: 64px;
 }
 
 h2 {
     font-size: 12px;
     font-weight: 500;
-    color: var(--text-muted);
-    margin-top: 64px;
-    margin-bottom: 24px;
+    color: var(--color-text-muted);
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
     text-transform: uppercase;
     letter-spacing: 0.06em;
 }
 
-/* --- LISTADOS E INTERACCIÓN (Enlaces fluidos con puntos) --- */
+.subtitle {
+    color: var(--color-text-muted);
+    font-size: 14px;
+    margin: 0 0 var(--space-lg) 0;
+}
+
+.description {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--color-text-body);
+    margin-bottom: var(--space-2xl);
+}
+
+/* --- LIST ITEMS (dotted links) --------------------------------------------- */
 .list {
     display: flex;
     flex-direction: column;
@@ -76,24 +140,25 @@ h2 {
 .item {
     display: flex;
     align-items: baseline;
-    color: var(--text);
+    color: var(--color-text);
     text-decoration: none;
     font-size: 15px;
     padding: 10px 0;
-    transition: color 0.2s ease;
+    transition: color var(--transition-fast);
 }
 
 .item:hover {
-    color: var(--accent);
+    color: var(--color-accent);
 }
 
+/* Dotted spacer between title and year */
 .dots {
     flex-grow: 1;
-    border-bottom: 1px dashed var(--line);
-    margin: 0 16px;
+    border-bottom: 1px dashed var(--color-line);
+    margin: 0 var(--space-sm);
     position: relative;
     top: -4px;
-    transition: border-color 0.2s ease;
+    transition: border-color var(--transition-fast);
 }
 
 .item:hover .dots {
@@ -101,27 +166,28 @@ h2 {
 }
 
 .year {
-    color: var(--text-muted);
+    color: var(--color-text-muted);
     font-size: 14px;
     font-variant-numeric: tabular-nums;
-    transition: color 0.2s ease;
+    transition: color var(--transition-fast);
 }
 
 .item:hover .year {
-    color: var(--accent);
+    color: var(--color-accent);
 }
 
-/* --- CASOS DE ESTUDIO Y ELEMENTOS MULTIMEDIA --- */
-.project-card, .featured-image {
+/* --- PROJECT / ARTICLE PAGES ----------------------------------------------- */
+.project-card,
+.featured-image {
     width: 100%;
     height: auto;
-    border-radius: 12px; 
-    border: 1px solid var(--border-subtle); 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015), 
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015),
                 0 1px 2px rgba(0, 0, 0, 0.02);
-    margin: 32px 0;
+    margin: var(--space-lg) 0;
     display: block;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform var(--transition-smooth);
 }
 
 a .project-card:hover {
@@ -130,15 +196,16 @@ a .project-card:hover {
 
 .back-link {
     display: inline-block;
-    color: var(--text-muted);
+    color: var(--color-text-muted);
     text-decoration: none;
     font-size: 14px;
-    margin-bottom: 48px;
-    transition: color 0.2s ease, transform 0.2s ease;
+    margin-bottom: var(--space-xl);
+    transition: color var(--transition-fast),
+                transform var(--transition-fast);
 }
 
 .back-link:hover {
-    color: var(--accent);
+    color: var(--color-accent);
     transform: translateX(-2px);
 }
 
@@ -152,17 +219,18 @@ a .project-card:hover {
     margin-bottom: 28px;
 }
 
-/* --- COMPONENTE NOTA (Mobile-First y UI Ajustada) --- */
-.postit-container {
+/* --- NOTE WIDGET ----------------------------------------------------------- */
+.note-widget {
     position: fixed;
     z-index: 9999;
-    min-width: 160px;
-    min-height: 36px;
-    max-width: 450px;
-    max-height: 450px;
-    border-radius: 8px;
+    min-width: var(--note-min-width);
+    min-height: var(--note-header-height);
+    max-width: var(--note-max-width);
+    max-height: var(--note-max-height);
+    border-radius: var(--note-border-radius);
     border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04),
+                0 1px 4px rgba(0, 0, 0, 0.02);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -171,13 +239,14 @@ a .project-card:hover {
     touch-action: none;
 }
 
-.postit-container.minimized {
+.note-widget.is-minimized {
     resize: none !important;
-    height: 36px !important;
+    height: var(--note-header-height) !important;
 }
 
-.postit-header {
-    height: 36px;
+/* Header / drag bar */
+.note-header {
+    height: var(--note-header-height);
     padding: 0 8px 0 4px;
     display: flex;
     align-items: center;
@@ -187,46 +256,45 @@ a .project-card:hover {
     user-select: none;
 }
 
-/* Controlador izquierdo optimizado a 32px y centrado */
-.postit-drag-handle {
-    width: 32px; 
+/* Six-dot drag handle icon */
+.note-drag-handle {
+    width: 32px;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
     opacity: 0.3;
     transition: opacity 0.15s ease;
     cursor: move;
     flex-shrink: 0;
 }
 
-.postit-header:hover .postit-drag-handle {
+.note-header:hover .note-drag-handle {
     opacity: 0.6;
 }
 
-/* Icono de 6 puntos ampliado a 12px de lienzo para evitar cortes ópticos */
-.postit-drag-handle::after {
+.note-drag-handle::after {
     content: "";
-    width: 12px;  
-    height: 12px; 
+    width: 12px;
+    height: 12px;
     background-image: radial-gradient(circle, #000 1px, transparent 1.5px);
     background-size: 4px 4px;
     background-repeat: repeat;
 }
 
-/* Microcopy de la cabecera */
-.postit-title-area {
+/* Widget title label */
+.note-label {
     font-size: 11px;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.35);
     letter-spacing: 0.08em;
-    margin-right: auto; 
+    margin-right: auto;
     flex-shrink: 0;
     user-select: none;
 }
 
-/* Botones superiores */
-.postit-btn {
+/* Header action buttons (minimize / clear) */
+.note-btn {
     background: none;
     border: none;
     color: #888;
@@ -242,34 +310,34 @@ a .project-card:hover {
     font-family: inherit;
 }
 
-#postit-min-btn {
+.note-btn--minimize {
     font-size: 11px;
     font-weight: bold;
 }
 
-#postit-close-btn {
+.note-btn--clear {
     font-size: 16px;
     line-height: 1;
 }
 
-.postit-btn:hover {
+.note-btn:hover {
     background: rgba(0, 0, 0, 0.06);
     color: #111;
 }
 
-/* Editor interno */
-.postit-body {
+/* Textarea body */
+.note-body {
     flex-grow: 1;
     padding: 4px 12px;
     display: flex;
 }
 
-.postit-container.minimized .postit-body,
-.postit-container.minimized .postit-footer {
+.note-widget.is-minimized .note-body,
+.note-widget.is-minimized .note-footer {
     display: none;
 }
 
-#postit-input {
+.note-textarea {
     width: 100%;
     height: 100%;
     background: transparent;
@@ -282,25 +350,12 @@ a .project-card:hover {
     padding: 4px 0;
 }
 
-#postit-input:focus {
+.note-textarea:focus {
     outline: none;
 }
 
-/* --- OPTIMIZACIÓN MÓVIL --- */
-@media (max-width: 600px) {
-    /* Oculta por completo la funcionalidad de la Nota en iPhone y móviles */
-    .postit-container {
-        display: none !important;
-    }
-    
-    .postit-btn {
-        width: 28px;
-        height: 28px;
-    }
-}
-
-/* Footer y selectores */
-.postit-footer {
+/* Footer with color swatches */
+.note-footer {
     height: 34px;
     padding: 0 12px;
     display: flex;
@@ -308,12 +363,12 @@ a .project-card:hover {
     border-top: 1px solid rgba(0, 0, 0, 0.02);
 }
 
-.postit-colors {
+.note-colors {
     display: flex;
-    gap: 6px;
+    gap: var(--space-xs);
 }
 
-.color-dot {
+.color-swatch {
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -321,20 +376,22 @@ a .project-card:hover {
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.color-dot.active {
+.color-swatch.is-active {
     box-shadow: 0 0 0 1.5px #111;
 }
 
-.color-yellow { background-color: #FDFFF4; }
-.color-blue { background-color: #EBF3FF; }
-.color-pink { background-color: #FDEBFF; }
+/* Individual swatch colors */
+.color-swatch--yellow { background-color: #FDFFF4; }
+.color-swatch--blue   { background-color: #EBF3FF; }
+.color-swatch--pink   { background-color: #FDEBFF; }
 
-/* --- OPTIMIZACIÓN MÓVIL --- */
+/* --- RESPONSIVE: hide note widget on mobile ------------------------------- */
 @media (max-width: 600px) {
-    .postit-container {
-        max-width: calc(100% - 32px) !important;
+    .note-widget {
+        display: none !important;
     }
-    .postit-btn {
+
+    .note-btn {
         width: 28px;
         height: 28px;
     }

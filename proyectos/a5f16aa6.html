@@ -1,28 +1,58 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Protegido — Caso de Estudio</title>
+    <title>Protected Project — Case Study</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/core.css">
-    <link rel="stylesheet" href="../style.css"> </head>
+    <link rel="stylesheet" href="../style.css">
+</head>
 <body>
+
+    <!-- Language toggle (top-right, fixed) -->
+    <button id="lang-toggle" class="lang-toggle" aria-label="Switch to Spanish">ES</button>
+
     <div class="container">
-        <a href="../index.html" class="back-link">← Volver al inicio</a> <main>
-            <section class="intro-section">
-                <h1>Diseño de una App de Gestión</h1>
-                <p class="subtitle">Caso de estudio protegido • Contenido Confidencial</p>
+
+        <a href="../index.html" class="back-link" data-i18n="nav.back">← Back</a>
+
+        <main>
+            <section>
+                <h1 data-i18n="case1.title">Management App Design</h1>
+                <p class="subtitle" data-i18n="case1.subtitle">
+                    Protected case study · Confidential content
+                </p>
             </section>
 
             <article class="content">
-                <p>Si estás viendo esto, es porque has introducido correctamente la contraseña criptográfica en el sistema estático de GitHub Pages.</p>
-                
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="UI de ejemplo" class="project-card">
+                <p data-i18n="case1.body.p1">
+                    If you can read this, you have successfully entered the cryptographic
+                    password in the static GitHub Pages system.
+                </p>
 
-                <p>Aquí puedes explayarte enseñando tus métricas de producto, flujos de UX complejos o decisiones estratégicas de diseño que no querías dejar abiertas a todo el público en la red.</p>
+                <img
+                    src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"
+                    alt="Sample UI mockup"
+                    class="project-card"
+                >
+
+                <p data-i18n="case1.body.p2">
+                    Here you can share your product metrics, complex UX flows, or strategic
+                    design decisions that you did not want to leave publicly accessible on
+                    the web.
+                </p>
             </article>
         </main>
+
     </div>
 
-    <script src="../postit.js" defer></script> </body>
+    <script src="../i18n.js"></script>
+    <script src="../note.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            i18n.init();
+        });
+    </script>
+
+</body>
 </html>

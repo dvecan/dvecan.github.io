@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,26 +8,31 @@
 </head>
 <body>
 
+    <!-- Language toggle (top-right, fixed) -->
+    <button id="lang-toggle" class="lang-toggle" aria-label="Switch to Spanish">ES</button>
+
     <main class="container">
-        
+
         <header class="header-main">
             <h1>David Velasco</h1>
-            <p class="subtitle">Product Designer</p>
+            <p class="subtitle" data-i18n="home.role">Product Designer</p>
         </header>
 
         <section class="description">
-            <p>
-                Diseñador de producto enfocado en la resolución de problemas complejos a través de soluciones sencillas, funcionales y de alta calidad visual. Especializado en conceptualización estratégica, arquitectura de información y diseño de interacción.
+            <p data-i18n="home.bio">
+                Product designer focused on solving complex problems through simple,
+                functional, and visually refined solutions. Specialized in strategic
+                conceptualization, information architecture, and interaction design.
             </p>
         </section>
 
         <section>
-            <h2>Proyectos Destacados</h2>
+            <h2 data-i18n="home.section.projects">Featured Projects</h2>
             <div class="list">
-                
+
                 <a href="proyectos/a5f16aa6.html" class="item">
-                    <span class="title">Caso de Estudio 1</span>
-                    <span class="dots"></span>
+                    <span class="title" data-i18n="home.project1.title">Case Study 1</span>
+                    <span class="dots" aria-hidden="true"></span>
                     <span class="year">2026</span>
                 </a>
 
@@ -35,12 +40,14 @@
         </section>
 
         <section>
-            <h2>Artículos</h2>
+            <h2 data-i18n="home.section.articles">Articles</h2>
             <div class="list">
-                
-                <a href="articulos/articulo-1.html" class="item">
-                    <span class="title">Pensamiento estratégico en el diseño de producto</span>
-                    <span class="dots"></span>
+
+                <a href="articulos/article-1.html" class="item">
+                    <span class="title" data-i18n="home.article1.title">
+                        Strategic Thinking in Product Design
+                    </span>
+                    <span class="dots" aria-hidden="true"></span>
                     <span class="year">2026</span>
                 </a>
 
@@ -49,6 +56,17 @@
 
     </main>
 
-    <script src="postit.js" defer></script>
+    <!--
+        Load i18n first so translations are available when note.js initialises.
+        note.js replaces the old postit.js.
+    -->
+    <script src="i18n.js"></script>
+    <script src="note.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            i18n.init();
+        });
+    </script>
+
 </body>
 </html>
