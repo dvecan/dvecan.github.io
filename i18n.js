@@ -51,6 +51,18 @@ const i18n = (() => {
             en: "Strategic Thinking in Product Design",
             es: "Pensamiento estratégico en el diseño de producto"
         },
+        "home.section.more": {
+            en: "Let’s talk!",
+            es: "¿Hablamos?"
+        },
+        "home.section.more.text": {
+            en: "Don’t just leave me on your to-do list. Find me on ",
+            es: "No lo dejes pendiente en la nota. Encuéntrame por "
+        },
+        "home.section.more.text.or": {
+            en: " or ",
+            es: " o "
+        },
 
         /* article-1.html */
         "article1.title": {
@@ -58,8 +70,8 @@ const i18n = (() => {
             es: "Pensamiento estratégico en el diseño de producto"
         },
         "article1.subtitle": {
-            en: "Article · 2026",
-            es: "Artículo · 2026"
+            en: "Article ·  04/2026",
+            es: "Artículo · 04/2026"
         },
         "article1.body.p1": {
             en: "Strategic thinking in product design means understanding not just what users need today, but what business goals, technical constraints, and market dynamics require over time. Great design is never purely aesthetic—it is the result of deliberate decisions grounded in context.",
@@ -70,14 +82,14 @@ const i18n = (() => {
             es: "Puedes añadir imágenes, vídeos explicativos en MP4, o texto en párrafos para detallar tu proceso de diseño estratégico."
         },
 
-        /* a5f16aa6.html (protected case study) */
+        /* a5f16aa6.html*/
         "case1.title": {
             en: "Management App Design",
             es: "Diseño de una App de Gestión"
         },
         "case1.subtitle": {
-            en: "Protected case study · Confidential content",
-            es: "Caso de estudio protegido · Contenido Confidencial"
+            en: "Case Study · 2026",
+            es: "Case Study · 2026"
         },
         "case1.body.p1": {
             en: "If you can read this, you have successfully entered the cryptographic password in the static GitHub Pages system.",
@@ -108,8 +120,8 @@ const i18n = (() => {
             es: "NOTA"
         },
         "note.placeholder": {
-            en: "Write a note… It will be saved in your cache.",
-            es: "Escribe una nota… Se guardará en tu caché."
+            en: "Keep track of your thoughts. Drop your notes here—they’re saved locally in your browser.",
+            es: "Para que no se te olvide nada. Apunta aquí tus notas; se quedan guardadas en tu navegador."
         },
         "note.clear.confirm": {
             en: "Do you want to delete the notes saved in this sticky note?",
