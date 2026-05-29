@@ -6,7 +6,7 @@
 /* --- DESIGN TOKENS --------------------------------------------------------- */
 :root {
     /* Colors */
-    --color-bg:           #F7F7F7;
+    --color-bg:           #fdfdfc;
     --color-text:         #111111;
     --color-text-muted:   #686868;
     --color-text-body:    #242424;
@@ -61,7 +61,16 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+.url a {
+    color: #8d8d86; /* <-- Cambia este código HEX por el color de acento de tu portfolio */
+    text-decoration: underline; /* Mantiene la línea abajo para indicar que es clicable (buena UX) */
+    transition: color 0.2s ease, opacity 0.2s ease; /* Transición suave */
+}
 
+.url a:hover {
+    color: #bcbbb5; /* Un tono un poco más oscuro o diferente para el feedback visual */
+    opacity: 0.8;
+}
 /* --- LAYOUT ---------------------------------------------------------------- */
 .container {
     max-width: var(--content-max-width);
