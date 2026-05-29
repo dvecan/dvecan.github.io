@@ -28,12 +28,12 @@ const i18n = (() => {
 
         /* index.html */
         "home.role": {
-            en: "Product Designer",
-            es: "Diseñador de Producto"
+            en: "Product Designer | Home office",
+            es: "Diseñador de Producto | Remoto"
         },
         "home.bio": {
-            en: "Product designer focused on solving complex problems through simple, functional, and visually refined solutions. Specialized in strategic conceptualization, information architecture, and interaction design.",
-            es: "Diseñador de producto enfocado en la resolución de problemas complejos a través de soluciones sencillas, funcionales y de alta calidad visual. Especializado en conceptualización estratégica, arquitectura de información y diseño de interacción."
+            en: "Product Designer at Cabify based in Vilafranca del Penedès (Barcelona). Currently, I thrive on bringing clarity and uncovering opportunities within highly ambiguous environments. Leveraging my background in brand identity and Behavioral Design, I transform complex experiences into seamless flows that don’t just work, but actively influence user behavior and drive business growth.",
+            es: "Product Designer en Cabify desde Vilafranca del Penedès (Barcelona). Actualmente, trabajo generando claridad y oportunidades en entornos de alta incertidumbre. Me apoyo en mi experiencia en identidad de marca y mi formación en Behavioral Design para transformar experiencias complejas en flujos que no solo funcionan, sino que influyan positivamente en el usuario y sumen al negocio."
         },
         "home.section.projects": {
             en: "Featured Projects",
